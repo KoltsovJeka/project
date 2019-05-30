@@ -1,6 +1,6 @@
 <?php
 	require_once 'connection.php';
-	require_once 'functions.php'
+	require_once 'functions.php';
 
 ?>
 <!doctype html>
@@ -23,7 +23,9 @@
 					Запланировано
 				</div>
 				<?php
+					$to_done = to_done();
 					$to_work = to_work();
+
 					$works = works();
 				?>
 				
@@ -86,9 +88,8 @@
 				<div class="row">
 					В работе	
 				</div>
-				
 				<?php
-					$to_done = to_done();
+					
 					$in_works = in_works();
 				?>
 				<?php foreach ($in_works as $in_work): ?>
@@ -97,7 +98,7 @@
 					<div class="card" style="width: 18rem;">
 						<div class="card-body">
 							<p class="card-text"><?=$in_work['content']?></p>
-							<form method="POST">
+							<form  method="POST">
 								<input type="submit" name="<?=$in_work['id']?>" class="btn btn-primary" value="Выполнено">
 							</form>
 						</div>
@@ -112,7 +113,7 @@
 				</div>
 
 				<?php
-					//$to_done = to_done();
+
 					$dones = dones();
 				?>
 				<?php foreach ($dones as $done): ?>
@@ -121,7 +122,7 @@
 					<div class="card" style="width: 18rem;">
 						<div class="card-body">
 							<p class="card-text"><?=$done['content']?></p>
-							<form method="POST">
+							<form method="">
 								<input type="submit" name="<?=$done['id']?>" class="btn btn-primary" value="Выполнено">
 							</form>
 						</div>

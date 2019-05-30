@@ -20,6 +20,32 @@ function add_work() {
 }
 
 
+function to_work(){
+
+	global $link;
+
+		foreach ($_POST as $name => $work['id']) {
+			
+			$getsql = "SELECT progress FROM plan WHERE id = '$name'";
+			$resultsql = mysqli_query($link, $getsql) or die( mysqli_error($link));
+
+			$row = mysqli_fetch_assoc($resultsql);
+			$prgrs = $row['progress'];
+
+			if ($prgrs = 0) {
+				
+				$sql = "UPDATE plan SET progress = progress + 1 WHERE id = '$name'";
+				$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+			}
+			else {
+				$sql = "UPDATE plan SET progress = progress - 1 WHERE id = '$name'";
+				$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+			}
+	}
+
+	
+}
+
 function works(){
 
 	global $link;
@@ -32,21 +58,6 @@ function works(){
 
 	return $works;					
 }
-
-
-function to_work(){
-
-	global $link;
-
-	$name = 'name';
-	
-	foreach ($_POST as $name => $work['id']) {
-
-		$sql = "UPDATE plan SET progress = 1 WHERE id = '$name'";
-		$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
-	}
-}
-
 
 function in_works(){
 
@@ -61,19 +72,25 @@ function in_works(){
 	return $in_works;					
 }
 
-
 function to_done(){
 
 	global $link;
 
-	
-	foreach ($_POST as $namee => $done['id']) {
+		foreach ($_POST as $name => $in_work['id']) {
 
-		$sql = "UPDATE plan SET progress = 2 WHERE id = '$namee'";
-		$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+			$getsql = "SELECT progress FROM plan WHERE id = '$name'";
+			$resultsql = mysqli_query($link, $getsql) or die( mysqli_error($link));
+
+			$row = mysqli_fetch_assoc($resultsql);
+			$prgrs = $row['progress'];
+
+			if ($prgrs = 1) {
+				
+				$sql = "UPDATE plan SET progress = progress + 2 WHERE id = '$name'";
+				$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+			}
 	}
 }
-
 
 function dones(){
 
@@ -87,5 +104,6 @@ function dones(){
 
 	return $dones;						
 }
+
 
 
