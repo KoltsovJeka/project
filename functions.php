@@ -16,7 +16,9 @@ function add_work() {
 		
 		// выполняем запрос
 		$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+
 	}
+
 }
 
 
@@ -105,5 +107,23 @@ function dones(){
 	return $dones;						
 }
 
+function done(){
 
+	global $link;
+
+		foreach ($_POST as $name => $done['id']) {
+
+			$getsql = "SELECT progress FROM plan WHERE id = '$name'";
+			$resultsql = mysqli_query($link, $getsql) or die( mysqli_error($link));
+
+			$row = mysqli_fetch_assoc($resultsql);
+			$prgrs = $row['progress'];
+
+			if ($prgrs = 2) {
+				
+				$sql = "UPDATE plan SET progress = progress + 2 WHERE id = '$name'";
+				$result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+			}
+	}
+}
 

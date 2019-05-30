@@ -1,7 +1,6 @@
 <?php
 	require_once 'connection.php';
 	require_once 'functions.php';
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,31 +11,31 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/../css/main.css">
 
     <title>Проект</title>
   </head>
   <body>
-	<div class="container">
+	<div class="container m-cont">
 		<div class="row">
 			<div class="col-sm">
 				<div class="row">
-					Запланировано
+					<h3>Запланировано</h3>
 				</div>
 				<?php
 					$to_done = to_done();
 					$to_work = to_work();
-
 					$works = works();
 				?>
 				
 				<?php foreach ($works as $work): ?>
 
-				<div class="row">
-					<div class="card" style="width: 18rem;">
+				<div class="row cards">
+					<div class="card text-white bg-primary" style="width: 18rem;">
 						<div class="card-body">
 							<p class="card-text"><?=$work['content']?></p>
 							<form method="POST">
-								<input type="submit" name="<?=$work['id']?>" class="btn btn-primary" value="Взять в работу">
+								<input type="submit" name="<?=$work['id']?>" class="btn btn-dark" value="Взять в работу">
 							</form>
 						</div>
 					</div>
@@ -44,12 +43,8 @@
 				</div>
 				<?php endforeach; ?>
 
-
-
-
-
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
 					Добавить задачу
 				</button>
 
@@ -70,7 +65,7 @@
 									<div class="form-group">
 										<input class="form-control form-control-lg" type="text" name="work_text">
 									</div>
-									<input type="submit" name="add_work" class="btn btn-primary">
+									<input type="submit" name="add_work" class="btn btn-success" value="Сохранить">
 								</form>
 								
 							</div>
@@ -86,20 +81,19 @@
 			</div>
 			<div class="col-sm">
 				<div class="row">
-					В работе	
+					<h3>В работе</h3>
 				</div>
 				<?php
-					
 					$in_works = in_works();
 				?>
 				<?php foreach ($in_works as $in_work): ?>
 					
-				<div class="row">
-					<div class="card" style="width: 18rem;">
+				<div class="row cards">
+					<div class="card text-white bg-warning" style="width: 18rem;">
 						<div class="card-body">
 							<p class="card-text"><?=$in_work['content']?></p>
 							<form  method="POST">
-								<input type="submit" name="<?=$in_work['id']?>" class="btn btn-primary" value="Выполнено">
+								<input type="submit" name="<?=$in_work['id']?>" class="btn btn-success" value="Выполнено">
 							</form>
 						</div>
 					</div>
@@ -109,21 +103,20 @@
 			</div>
 			<div class="col-sm">
 				<div class="row">
-					Выполнено	
+					<h3>Выполнено</h3>
 				</div>
 
 				<?php
-
 					$dones = dones();
 				?>
 				<?php foreach ($dones as $done): ?>
 
-				<div class="row">
-					<div class="card" style="width: 18rem;">
+				<div class="row cards">
+					<div class="card text-white bg-success" style="width: 18rem;">
 						<div class="card-body">
 							<p class="card-text"><?=$done['content']?></p>
-							<form method="">
-								<input type="submit" name="<?=$done['id']?>" class="btn btn-primary" value="Выполнено">
+							<form method="POST">
+								<input type="submit" name="<?=$done['id']?>" class="btn btn-danger" value="Удалить">
 							</form>
 						</div>
 					</div>
@@ -132,13 +125,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
